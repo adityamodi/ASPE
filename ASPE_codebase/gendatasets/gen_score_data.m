@@ -18,7 +18,7 @@ function gen_score_data(dataId,clfId,C,varargin)
 	train = data(1:ceil(0.6*size(data,1)),1:size(tdata,2));
 	train_label = data(1:ceil(0.6*size(data,1)),size(tdata,2)+1);
 	test = data(ceil(0.6*size(data,1))+1:end,1:size(tdata,2));
-	test_label = data(ceil(0.6*size(data,1))+1:end,1:size(tdata,2));
+	test_label = data(ceil(0.6*size(data,1))+1:end,size(tdata,2)+1);
 
 	if clfId ~= 1
 		gammav = varargin{1};
@@ -41,10 +41,9 @@ function gen_score_data(dataId,clfId,C,varargin)
 			end
 		end
 
-		[max_acc,max_accuracy_ind] = max(accuracy(:));[max_auroc,max_auroc_ind] = max(accuracy(:));[max_fmeas,max_f_measure_ind] = max(accuracy(:));
+		[max_acc,max_accuracy_ind] = max(accuracy(:));[max_auroc,max_auroc_ind] = max(AUROC(:));[max_fmeas,max_f_measure_ind] = max(f_measure(:));
 		params.clfId = 1;
 		fprintf('Parameters found\n\n');
-		pause
 		for selectId=1:3
 			switch selectId
 				case 1
@@ -120,6 +119,6 @@ function gen_score_data(dataId,clfId,C,varargin)
 	end
 
 	fprintf('Saving data into file.\n');
-	save(['data_processed/' datadir(dataId).name '_' num2str(clfId)] , 'test', 'test_label', 'test_scores_AUROC', 'test_scores_acc',...
-	 'test_scores_AUROC', 'train', 'train_label', 'max_auroc','max_fmeas','max_acc');
+	save(['data_processed/' strrep(datadir(dataId).name,'.mat','') '_' num2str(clfId) '.mat'] , 'test', 'test_label', 'test_scores_AUROC', 'test_scores_acc',...
+	 'test_scores_fmeas', 'train', 'train_label', 'max_auroc','max_fmeas','max_acc');
 end
