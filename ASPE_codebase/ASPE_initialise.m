@@ -4,9 +4,9 @@ function [scores,labels,numsamples,initlabels] = ASPE_initialise(dataId,selectId
 	% selectId - 1 - Accuracy
 	% selectId - 2 - F-measure
 	% percLabel - Percentage of scores to be labeled,
-	% densityId - 0 - Normal
-	% densityId - 1 - Beta
-	% densityId - 2 - truncated normal
+	% densityId - 0 - truncated Normal
+	% densityId - 1 - normal
+	% densityId - 2 - beta
 	% sampleId - 0 - Random one time sampling
 	% sampleId - 1 - Iterative but passive sampling
 	% sampleId - 2 - Iterative active sampling

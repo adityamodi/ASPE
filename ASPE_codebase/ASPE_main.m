@@ -10,12 +10,13 @@ function ASPE_main(dataId,selectId,percLabel,sampleId,densityId_0,densityId_1)
 	end
 
 	size(scores)
-	sel = randperm(length(scores));
-	initlabel
-	nsel = sel(initlabel+1:length(scores));
-	sel = sel(1:initlabel);
-	scores_lab = scores(sel);
-	scores_unlab = scores(nsel);
-	labels_sel = labels(sel);
-	labels_nsel = labels(nsel);
+
+%	samplabels = NaN(length(scores),1);
+	[samplabels,budget] = initialLabeling(labels,initlabel);
+	[params,distHandler0,distHandler1,m0,m1] = get_dist_handlers(densityId_0,densityId_1);
+
+	if sampleId == 0
+		lambda = 0.5;
+		
+
 end
