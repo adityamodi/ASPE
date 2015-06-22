@@ -1,11 +1,13 @@
-function [maxent_lik,lik_der] = get_maxent_likelihood(scores,labels,params,lambda,distHandler0,disthandler1,m0,m1)
+function [maxent_lik,lik_der] = get_maxent_likelihood(params,scores,labels,lambda,distHandler0,disthandler1,m0,m1)
 	% distId - 0 - truncated normal
 	% distId - 1 - normal
 	% distId - 2 - beta
 
 	% lambda - value given for the lanmbda value in the modified likelihood expression
 
-	p1 = params(0);
+	p1 = params(1);
+
+	lik_der = zeros(length(params),1);
 
 	params0 = params(2:1+m0);
 	params1 = params(m0+2:m1+m0+1);
@@ -64,3 +66,5 @@ function [maxent_lik,lik_der] = get_maxent_likelihood(scores,labels,params,lambd
 
 	maxent_lik = -maxent_lik;
 	lik_der = -lik_der;
+
+end

@@ -10,7 +10,7 @@ function [lik,der] = beta_density(x,params)
 		a = params(1);
 		b = params(2);
 
-		lik = beta_f(a,b)*(bsxfun(@times,x.^(a-1),(1-x).^(b-1)));
+		lik = (bsxfun(@times,x.^(a-1),(1-x).^(b-1)))/beta_f(a,b);
 
 		dera = bsxfun(@times,lik,log(x)+psi(a+b)-psi(a));
 		derb = bsxfun(@times,lik,log(1-x)+psi(a+b)-psi(b));
